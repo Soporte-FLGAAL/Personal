@@ -221,6 +221,22 @@ CREATE TABLE IF NOT EXISTS Empresa_Base(
 );
 
 -- =========================================================
+-- RELACION EMPRESA - Base
+-- Una empresa puede tener multiples bases.
+-- =========================================================
+CREATE TABLE IF NOT EXISTS Jefe_inmediato(
+    JI_jefe INT NOT NULL,
+    JI_subordinado INT NOT NULL,
+    PRIMARY KEY (JI_jefe, JI_subordinado)
+    FOREIGN KEY (JI_jefe) REFERENCES Personal(Pers_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (JI_subordinado) REFERENCES Personal(Pers_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- =========================================================
 -- Personal de las empresas
 -- =========================================================
 CREATE TABLE IF NOT EXISTS Personal(
